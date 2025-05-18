@@ -192,7 +192,7 @@
         <!-- Hero Section    <a href="#" class="btn btn-outline-primary me-2">
                         <i class="fas fa-user"></i>
                     </a>-->  
-                    <a href="cliente/Page_Compra.php" class="btn btn-outline-primary cart-icon">
+                    <a href="Page_Compra.php" class="btn btn-outline-primary cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </a>
