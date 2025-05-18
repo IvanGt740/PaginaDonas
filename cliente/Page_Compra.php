@@ -180,8 +180,33 @@
             padding: 40px 0;
             margin-top: 50px;
         }
+
+        
+        .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+        transform: scale(1.4);
+    }
+
+    @media (max-width: 768px) {
+        .whatsapp-float img {
+            width: 50px;
+            height: 50px;
+        }
+    }
     </style>
 </head>
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/50255325757?text=Necesito%20más%20información" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+    <img src="../images/Whatsapp.png" alt="WhatsApp" width="60" height="60">
+</a>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
@@ -197,23 +222,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../index.html">Inicio</a>
                     </li>
+                   
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Donas</a>
+                        <a class="nav-link" href="../cliente/contacto.php">Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Paquetes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
+                        <a class="nav-link" href="https://ivangt740.github.io/PaginaDonas/Game/index.html">Game</a>
                     </li>
                 </ul>
                 <div class="ms-3 d-flex align-items-center">
-                    <a href="#" class="btn btn-outline-primary me-2">
+                    <!-- Hero Section    <a href="#" class="btn btn-outline-primary me-2">
                         <i class="fas fa-user"></i>
-                    </a>
+                    </a>-->  
                     <a href="#" class="btn btn-primary cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">3</span>
@@ -399,9 +419,44 @@
                         </div>
                         
                         <!-- Checkout Button -->
-                        <button class="btn btn-primary btn-lg w-100 mt-4 mb-3">
-                            Proceder al Pago
-                        </button>
+                        <button class="btn btn-primary btn-lg w-100 mt-4 mb-3" id="proceed-to-pay">
+                                Proceder al Pago
+                            </button>
+
+                            <script>
+                            document.getElementById('proceed-to-pay').addEventListener('click', function() {
+                                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                
+                                if (cart.length === 0) {
+                                    alert('Tu carrito está vacío. Añade productos antes de proceder al pago.');
+                                    return;
+                                }
+                                
+                                // Calcular total
+                                const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                                const envio = 15.00;
+                                const total = subtotal + envio;
+                                
+                                // Crear mensaje para WhatsApp
+                                let message = '¡Hola Chapin Donas! Quiero realizar el siguiente pedido:%0A%0A';
+                                
+                                // Agregar productos al mensaje
+                                cart.forEach(item => {
+                                    message += `- ${item.name} x${item.quantity} - Q${(item.price * item.quantity).toFixed(2)}%0A`;
+                                });
+                                
+                                // Agregar totales
+                                message += `%0ASubtotal: Q${subtotal.toFixed(2)}%0A`;
+                                message += `Envío: Q${envio.toFixed(2)}%0A`;
+                                message += `%0ATOTAL: Q${total.toFixed(2)}%0A%0A`;
+                                message += 'Por favor confirmen disponibilidad y forma de pago. ¡Gracias!';
+                                
+                                // Abrir WhatsApp con el mensaje
+                                window.open(`https://wa.me/50255325757?text=${message}`, '_blank');
+                            });
+                            </script>
+
+
                         
                         <!-- Payment Methods -->
                         <div class="text-center mt-3">
