@@ -23,10 +23,11 @@
             background-color: var(--light-color);
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
+
         .navbar-brand img {
             height: 50px;
         }
+
         
         .hero-section {
             background-color: var(--primary-color);
@@ -137,8 +138,34 @@
 
         
 
+        .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+        transform: scale(1.4);
+    }
+
+    @media (max-width: 768px) {
+        .whatsapp-float img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+        
+
     </style>
 </head>
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/50255325757?text=Necesito%20más%20información" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+    <img src="images/Whatsapp.png" alt="WhatsApp" width="60" height="60">
+</a>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
@@ -152,10 +179,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Inicio</a>
+                        <a class="nav-link active" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Donas</a>
+                        <a class="nav-link" href="productos/index.php">Donas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Paquetes</a>
@@ -164,14 +191,17 @@
                         <a class="nav-link" href="#">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
+                        <a class="nav-link" href="cliente/contacto.php">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://ivangt740.github.io/PaginaDonas/Game/index.html">Game</a>
                     </li>
                 </ul>
                 <div class="ms-3 d-flex align-items-center">
-                    <a href="#" class="btn btn-outline-primary me-2">
+                    <a href="cliente/login.php" class="btn btn-outline-primary me-2">
                         <i class="fas fa-user"></i>
                     </a>
-                    <a href="#" class="btn btn-outline-primary cart-icon">
+                    <a href="cliente/Page_Compra.php" class="btn btn-outline-primary cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </a>
@@ -188,7 +218,7 @@
                     <h1 class="display-4 fw-bold mb-4">Deliciosas Donas Artesanales</h1>
                     <p class="lead mb-4">Descubre el sabor auténtico de nuestras donas hechas a mano con ingredientes frescos y de calidad.</p>
                     <div class="d-flex">
-                        <a href="#productos" class="btn btn-light btn-lg me-3">Ver Productos</a>
+                        <a href="/productos/index.php" class="btn btn-light btn-lg me-3">Ver Productos</a>
                         <a href="#" class="btn btn-outline-light btn-lg">Ofertas Especiales</a>
                     </div>
                 </div>
@@ -265,7 +295,9 @@
                             <p class="card-text text-muted">Deliciosa dona glaseada con chocolate premium.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold fs-5">Q25.00</span>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart me-1"></i> Añadir</button>
+                                <button onclick='addToCart({ id: "chocolate", name: "Dona de Chocolate", price: 25, image: "../images/DonaAlmendra.jpeg" })'>
+                                Añadir
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -281,7 +313,9 @@
                             <p class="card-text text-muted">Cubierta con glaseado de fresa natural y sprinkles.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold fs-5">Q22.00</span>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart me-1"></i> Añadir</button>
+                                <button onclick='addToCart({ id: "glaseada", name: "Dona de Fresa Glaseada", price: 22, image: "../images/DonaOreo.jpeg" })'>
+                                Añadir
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -297,7 +331,9 @@
                             <p class="card-text text-muted">Rellena con Nutella y cubierta con azúcar glass.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold fs-5">Q28.00</span>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart me-1"></i> Añadir</button>
+                                <button onclick='addToCart({ id: "FresaBanano", name: "Dona Fresa Banano", price: 28, image: "../images/DonaFresaBanano.jpeg" })'>
+                                Añadir
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -313,7 +349,9 @@
                             <p class="card-text text-muted">Glaseado de maple con trozos de tocino caramelizado.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold fs-5">Q32.00</span>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart me-1"></i> Añadir</button>
+                                <button onclick='addToCart({ id: "Maple", name: "Dona Maple", price: 28, image: "../images/DonaNutella.jpeg" })'>
+                                Añadir
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -321,7 +359,7 @@
             </div>
             
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-lg btn-outline-primary">Ver Todas las Donas</a>
+                <a href="productos/index.php" class="btn btn-lg btn-outline-primary">Ver Todas las Donas</a>
             </div>
         </div>
     </section>
@@ -434,9 +472,9 @@
                     <img src="images/logo3.png" style="width: 110px; height: 90px;" alt="Chapin Donas Logo" class="mb-4">
                     <p>Donas artesanales hechas con amor y los mejores ingredientes. Sabor chapín en cada mordida.</p>
                     <div class="d-flex mt-3">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61576232459966" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/donaschapin/" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/+50255325757?text=Necesito%20más%20información." class="text-white me-3"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-6 mb-4 mb-lg-0">
@@ -508,7 +546,50 @@
                     }, 1500);
                 });
             });
-        });
+        }); 
     </script>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Función para añadir productos al carrito
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Verificar si el producto ya está en el carrito
+            const existingProduct = cart.find(item => item.id === product.id);
+            
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                product.quantity = 1;
+                cart.push(product);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        // Actualizar contador del carrito
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = totalItems;
+        }
+
+        // Cargar contador al iniciar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            
+            // Manejar clic en el icono del carrito
+            document.querySelector('.cart-icon').addEventListener('click', function(e) {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                if (cart.length === 0) {
+                    e.preventDefault();
+                    alert('Tu carrito está vacío. Añade productos antes de continuar.');
+                }
+            });
+        });
+        </script>
+
 </body>
 </html>
