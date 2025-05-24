@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras - Chapin Donas</title>
+    <link rel="icon" href="../images/icono.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -26,6 +27,10 @@
         
         .navbar-brand img {
             height: 50px;
+        }
+
+        .navbar-brand img:hover{
+            transform: scale(1.2);
         }
         
         .page-header {
@@ -201,13 +206,87 @@
             height: 50px;
         }
     }
+
+    /* Botón de redes sociales flotante */
+    .social-float {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        z-index: 1000;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        margin: 10px;
+    }
+
+    .social-float:hover {
+        transform: scale(1.4);
+    }
+
+    .social-dropdown {
+        position: absolute;
+        bottom: 60px;
+        right: 0;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .social-dropdown a {
+        display: block;
+        transition: transform 0.2s;
+    }
+
+    .social-dropdown a:hover {
+        transform: scale(1.2);
+    }
+
+    .social-dropdown.show {
+        display: flex;
+    }
+
+    @media (max-width: 768px) {
+        .social-float img {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .social-float {
+            bottom: 90px;
+            right: 20px;
+        }
+    }
     </style>
 </head>
-<!-- Botón flotante de WhatsApp -->
-<a href="https://wa.me/50255325757?text=Necesito%20más%20información" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
-    <img src="../images/Whatsapp.png" alt="WhatsApp" width="60" height="60">
-</a>
+
+
+
+
 <body>
+
+    <!-- Botón flotante de redes sociales -->
+    <div class="social-float" id="socialFloat">
+        <img src="../images/social-icon3.png" alt="Redes Sociales" width="60" height="60">
+        <div class="social-dropdown" id="socialDropdown">
+            <a href="https://www.facebook.com/profile.php?id=61576232459966" target="_blank" aria-label="Facebook">
+                <img src="../images/facebook-icon.png" alt="Facebook" width="40" height="40">
+            </a>
+            <a href="https://www.instagram.com/chapindonas/" target="_blank" aria-label="Instagram">
+                <img src="../images/instagram-icon.png" alt="Instagram" width="40" height="40">
+            </a>
+            <a href="https://vm.tiktok.com/ZMSYswUvv/" target="_blank" aria-label="TikTok">
+                <img src="../images/tiktok-icon.png" alt="TikTok" width="40" height="40">
+            </a>
+        </div>
+    </div>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/50255325757?text=Necesito%20más%20información" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+        <img src="../images/Whatsapp.png" alt="WhatsApp" width="60" height="60">
+    </a>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
@@ -222,12 +301,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../index.html">Inicio</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Productos</a>
+                    </li>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="../cliente/contacto.php">Contacto</a>
+                        <a class="nav-link" href="../cliente/contacto.html">Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://ivangt740.github.io/PaginaDonas/Game/index.html">Game</a>
+                        <a class="nav-link" href="https://ivangt740.github.io/PaginaDonas/Game/index.html">GAME</a>
                     </li>
                 </ul>
                 <div class="ms-3 d-flex align-items-center">
@@ -557,7 +639,8 @@
                     <p>Donas artesanales hechas con amor y los mejores ingredientes. Sabor chapín en cada mordida.</p>
                     <div class="d-flex mt-3">
                         <a href="https://www.facebook.com/profile.php?id=61576232459966" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/donaschapin/" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/chapindonas/" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="https://vm.tiktok.com/ZMSYswUvv/" class="text-white me-3"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://wa.me/+50255325757?text=Necesito%20más%20información." class="text-white me-3"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
@@ -582,10 +665,10 @@
                 <div class="col-lg-4">
                     <h5 class="mb-3">Contáctanos</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Zona 10, Ciudad de Guatemala</li>
-                        <li class="mb-2"><i class="fas fa-phone-alt me-2"></i> (502) 2222-3333</li>
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@chapindonas.com</li>
-                        <li class="mb-2"><i class="fas fa-clock me-2"></i> Lun - Sáb: 8:00 AM - 8:00 PM</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>3a. Avenida 2-28, Zona 1 Boca Del Monte, Villa Canales, Guatemala</li>
+                        <li class="mb-2"><i class="fas fa-phone-alt me-2"></i> (502) 5532-5757</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> donaschapin@gmail.com</li>
+                        <li class="mb-2"><i class="fas fa-clock me-2"></i> Lun - Dom: 7:00 AM - 8:00 PM</li>
                     </ul>
                 </div>
             </div>
@@ -847,6 +930,19 @@
             const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
             document.querySelector('.cart-count').textContent = totalItems;
         }
+        </script>
+
+        <script>
+        // Funcionalidad para el botón de redes sociales
+        document.getElementById('socialFloat').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('socialDropdown').classList.toggle('show');
+        });
+
+        // Cerrar el menú al hacer clic en cualquier parte de la página
+        document.addEventListener('click', function() {
+            document.getElementById('socialDropdown').classList.remove('show');
+        });
         </script>
 
 </body>

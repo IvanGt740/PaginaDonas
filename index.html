@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapin Donas - Donas Artesanales</title>
+    <link rel="icon" href="images/icono.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -24,8 +25,17 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
+        
+
+        
+
         .navbar-brand img {
             height: 50px;
+            
+        }
+
+        .navbar-brand img:hover{
+            transform: scale(1.2);
         }
 
         
@@ -47,6 +57,7 @@
             left: 0;
             right: 0;
             bottom: 0;
+            
         }
         
         .product-card {
@@ -56,10 +67,12 @@
             transition: transform 0.3s;
             margin-bottom: 25px;
             background-color: var(--light-color);
+            
         }
         
         .product-card:hover {
             transform: translateY(-5px);
+            
         }
         
         .product-image {
@@ -104,7 +117,7 @@
         .section-title::after {
             content: "";
             position: absolute;
-            width: 60%;
+            width: 80%;
             height: 3px;
             background-color: var(--secondary-color);
             bottom: 0;
@@ -145,6 +158,7 @@
         z-index: 1000;
         cursor: pointer;
         transition: transform 0.3s ease;
+        margin: 2px;
     }
 
     .whatsapp-float:hover {
@@ -168,12 +182,83 @@
         z-index: 1;
     }
 
+    /* Botón de redes sociales flotante */
+    .social-float {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        z-index: 1000;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        margin: 10px;
+    }
+
+    .social-float:hover {
+        transform: scale(1.4);
+    }
+
+    .social-dropdown {
+        position: absolute;
+        bottom: 60px;
+        right: 0;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .social-dropdown a {
+        display: block;
+        transition: transform 0.2s;
+    }
+
+    .social-dropdown a:hover {
+        transform: scale(1.2);
+    }
+
+    .social-dropdown.show {
+        display: flex;
+    }
+
+    @media (max-width: 768px) {
+        .social-float img {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .social-float {
+            bottom: 90px;
+            right: 20px;
+        }
+    }
+
+    
+
         
 
     </style>
 </head>
 
 <body>
+
+    <!-- Botón flotante de redes sociales -->
+    <div class="social-float" id="socialFloat">
+        <img src="images/social-icon3.png" alt="Redes Sociales" width="60" height="60">
+        <div class="social-dropdown" id="socialDropdown">
+            <a href="https://www.facebook.com/profile.php?id=61576232459966" target="_blank" aria-label="Facebook">
+                <img src="images/facebook-icon.png" alt="Facebook" width="40" height="40">
+            </a>
+            <a href="https://www.instagram.com/chapindonas/" target="_blank" aria-label="Instagram">
+                <img src="images/instagram-icon.png" alt="Instagram" width="40" height="40">
+            </a>
+            <a href="https://vm.tiktok.com/ZMSYswUvv/" target="_blank" aria-label="TikTok">
+                <img src="images/tiktok-icon.png" alt="TikTok" width="40" height="40">
+            </a>
+        </div>
+    </div>
 
     <!-- Botón flotante de WhatsApp -->
     <a href="https://wa.me/50255325757?text=Necesito%20más%20información" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
@@ -182,7 +267,7 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container">
+        <div class="container" >
             <a class="navbar-brand" href="#">
                 <img src="images/logo3.png" alt="Chapin Donas Logo" class="img-fluid">
             </a>
@@ -197,12 +282,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Inicio</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#productos">Productos</a>
+                    </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="cliente/contacto.php">Contacto</a>
+                        <a class="nav-link" href="cliente/contacto.html">Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://ivangt740.github.io/PaginaDonas/Game/index.html">Game</a>
+                        <a class="nav-link" href="https://ivangt740.github.io/PaginaDonas/Game/index.html">GAME</a>
                     </li>
                 </ul>
                 <div class="ms-3 d-flex align-items-center">
@@ -239,7 +327,7 @@
     </section>
 
     <!-- Categorías -->
-    <section class="py-5">
+    <section class="py-4">
         <div class="container">
             <h2 class="text-center section-title">Categorías Populares</h2>
             <div class="row">
@@ -249,7 +337,7 @@
                         <img src="images/DonaAlmendra.jpeg" class="mx-auto my-3" style="width: 95%; height: 85%; border-radius: 10px;" alt="Clásicas">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Clásicas</h5>
+                            <h5 class="card-title">Mania y almendra con Nutella</h5>
                             <a href="#" class="stretched-link"></a>
                         </div>
                     </div>
@@ -260,7 +348,7 @@
                         <img src="images/DonaOreo.jpeg" class="mx-auto my-3" style="width: 95%; height: 85%; border-radius: 10px;" alt="Rellenas">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Rellenas</h5>
+                            <h5 class="card-title">Fresa y Oreo con Nutella</h5>
                             <a href="#" class="stretched-link"></a>
                         </div>
                     </div>
@@ -271,7 +359,7 @@
                         <img src="images/DonaFresaBanano.jpeg" class="mx-auto my-3" style="width: 95%; height: 85%; border-radius: 10px;" alt="Especiales">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Especiales</h5>
+                            <h5 class="card-title">Fresa, banano y mania con Nutella</h5>
                             <a href="#" class="stretched-link"></a>
                         </div>
                     </div>
@@ -280,19 +368,59 @@
                     <div class="card text-center h-100">
                         <img src="images/DonaNutella.jpeg" class="mx-auto my-3" style="width: 95%; height: 85%; border-radius: 10px;" alt="Mini Donas">
                         <div class="card-body">
-                            <h5 class="card-title">Mini Donas</h5>
+                            <h5 class="card-title">Mania con Leche condensada y Cajeta</h5>
                             <a href="#" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+           <!-- Sección de Ingredientes en columnas -->
+            <h2 class="text-center section-title mt-3">Ingredientes</h2>
+            
+                <!-- Columna 1: Jarabes -->
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <h2 class="text-center section-title mt-4">Jarabes</h2>
+                        <div class="list-unstyled mb-0">
+                            <div>- Nutella</div>
+                            <div>- Leche Condensada</div>
+                            <div>- Cajeta</div>
+                            <div>- Hershey's de fresa</div>
+                        </div>
+                    </div>
+                                
+                <!-- Columna 2: Fruta -->
+                <div class="col-md-4">
+                        <h2 class="text-center section-title mt-4">Frutas</h2>
+                        <div class="list-unstyled mb-0">
+                            <div>- Banano</div>
+                            <div>- Fresa</div>
+                            <div>- Melocotón</div>
+                        </div>
+                    </div>
+                           
+                
+                <!-- Columna 3: Toppings -->
+                <div class="col-md-4">
+                        <h2 class="text-center section-title mt-3">Toppings</h2>
+                        <div class="list-unstyled mb-0">
+                            <div>- Oreo</div>
+                            <div>- Chispas de Chocolate</div>
+                            <div>- Coco Rallado</div>
+                            <div>- Manía</div>
+                            <div>- Anicillo</div>
+                            <div>- Almendra</div>
+                        </div>
+                    
+                           
+                </div>
+            
     </section>
 
     <!-- Productos Destacados -->
     <section class="py-5 bg-light" id="productos">
         <div class="container">
-            <h2 class="text-center section-title">Donas Destacadas</h2>
+            <h2 class="text-center section-title mt-0">Donas Destacadas</h2>
             <div class="row">
                 <!-- Producto 1 -->
                 <div class="col-md-6 col-lg-3">
@@ -300,11 +428,11 @@
                         <div class="product-image" style="background-image: url('images/DonaAlmendra.jpeg')"></div>
                         <div class="card-body">
                             <span class="badge category-badge mb-2">Bestseller</span>
-                            <h5 class="card-title">Dona de Chocolate</h5>
-                            <p class="card-text text-muted">Deliciosa dona glaseada con chocolate premium.</p>
+                            <h5 class="card-title">Pack 4 Mini donas</h5>
+                            <p class="card-text text-muted"> Incluye: 1 Jarabe y 1 topping</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold fs-5">Q15.00</span>
-                                <button onclick='addToCart({ id: "chocolate", name: "Dona de Chocolate", price: 15, image: "../images/DonaAlmendra.jpeg" })'>
+                                <span class="fw-bold fs-5"> Q15.00</span>
+                                <button onclick='addToCart({ id: "chocolate", name: "Pack 4 Mini donas", price: 15, image: "../images/DonaAlmendra.jpeg" })'>
                                 Añadir
                                 </button>
                             </div>
@@ -318,11 +446,11 @@
                         <div class="product-image" style="background-image: url('images/DonaOreo.jpeg')"></div>
                         <div class="card-body">
                             <span class="badge category-badge mb-2">Popular</span>
-                            <h5 class="card-title">Dona de Fresa</h5>
-                            <p class="card-text text-muted">Cubierta con glaseado de fresa natural y sprinkles.</p>
+                            <h5 class="card-title">Pack 6 Mini donas</h5>
+                            <p class="card-text text-muted">Incluye: 2 Jarabes y 2 toppings.</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold fs-5">Q12.00</span>
-                                <button onclick='addToCart({ id: "glaseada", name: "Dona de Fresa Glaseada", price: 12, image: "../images/DonaOreo.jpeg" })'>
+                                <span class="fw-bold fs-5">Q20.00</span>
+                                <button onclick='addToCart({ id: "glaseada", name: "Pack 6 Mini donas", price: 20, image: "../images/DonaOreo.jpeg" })'>
                                 Añadir
                                 </button>
                             </div>
@@ -336,29 +464,29 @@
                         <div class="product-image" style="background-image: url('images/DonaFresaBanano.jpeg')"></div>
                         <div class="card-body">
                             <span class="badge category-badge mb-2">Rellena</span>
-                            <h5 class="card-title">Dona de Nutella</h5>
-                            <p class="card-text text-muted">Rellena con Nutella y cubierta con azúcar glass.</p>
+                            <h5 class="card-title">Pack 8 Mini donas</h5>
+                            <p class="card-text text-muted">Incluye: 3 Jarabes y 3 toppings.</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold fs-5">Q18.00</span>
-                                <button onclick='addToCart({ id: "FresaBanano", name: "Dona Fresa Banano", price: 18, image: "../images/DonaFresaBanano.jpeg" })'>
+                                <span class="fw-bold fs-5">Q25.00</span>
+                                <button onclick='addToCart({ id: "FresaBanano", name: "Pack 8 Mini donas", price: 25, image: "../images/DonaFresaBanano.jpeg" })'>
                                 Añadir
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Producto 4 -->
+
+               <!-- Producto 4 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="product-card">
                         <div class="product-image" style="background-image: url('images/DonaNutella.jpeg')"></div>
                         <div class="card-body">
                             <span class="badge category-badge mb-2">Especial</span>
-                            <h5 class="card-title">Dona de Maple Bacon</h5>
-                            <p class="card-text text-muted">Glaseado de maple con trozos de tocino caramelizado.</p>
+                            <h5 class="card-title">Pack Fiesta 12 Mini Donas</h5>
+                            <p class="card-text text-muted">Incluye: 4 Jarabes y 4 toppings.</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold fs-5">Q12.00</span>
-                                <button onclick='addToCart({ id: "Maple", name: "Dona Maple", price: 12, image: "../images/DonaNutella.jpeg" })'>
+                                <span class="fw-bold fs-5">Q40.00</span>
+                                <button onclick='addToCart({ id: "Maple", name: "Pack Fiesta 12 Mini Donas", price: 40, image: "../images/DonaNutella.jpeg" })'>
                                 Añadir
                                 </button>
                             </div>
@@ -366,9 +494,11 @@
                     </div>
                 </div>
             </div>
+             
+                
             
             <div class="text-center mt-4">
-                <a href="productos/index.php" class="btn btn-lg btn-outline-primary">Ver Todas las Donas</a>
+                <a href="#productos" class="btn btn-lg btn-outline-primary">Ver Todas las Donas</a>
             </div>
         </div>
     </section>
@@ -379,11 +509,11 @@
             <div class="row align-items-center">
                 <div class="col-md-7">
                     <h2 class="mb-3">¡Oferta Especial de Lanzamiento!</h2>
-                    <p class="lead mb-4">Compra una caja de 12 donas y recibe 2 donas gratis. Promoción válida por tiempo limitado.</p>
-                    <a href="#" class="btn btn-light">¡Aprovechar Ahora!</a>
+                    <p class="lead mb-4">Juega en nuestro apartado GAME, si obtienes un nuevo puntaje te regalamos una dona completamente Gratis. Promoción válida por tiempo limitado.</p>
+                    <a href="https://ivangt740.github.io/PaginaDonas/Game/index.html" class="btn btn-light">¡Aprovechar Ahora!</a>
                 </div>
                 <div class="col-md-5 text-center mt-4 mt-md-0">
-                    <img src="images/oferta.png" style="width: 450px; height: 200px; border-radius: 10px;" alt="Oferta especial" class="img-fluid rounded">
+                    <img src="images/oferta.png" style="width: 400px; height: 200px; border-radius: 10px;" alt="Oferta especial" class="img-fluid rounded">
                 </div>
             </div>
         </div>
@@ -482,7 +612,8 @@
                     <p>Donas artesanales hechas con amor y los mejores ingredientes. Sabor chapín en cada mordida.</p>
                     <div class="d-flex mt-3">
                         <a href="https://www.facebook.com/profile.php?id=61576232459966" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/donaschapin/" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/chapindonas/" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="https://vm.tiktok.com/ZMSYswUvv/" class="text-white me-3"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://wa.me/+50255325757?text=Necesito%20más%20información." class="text-white me-3"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
@@ -507,10 +638,10 @@
                 <div class="col-lg-4">
                     <h5 class="mb-3">Contáctanos</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Zona 10, Ciudad de Guatemala</li>
-                        <li class="mb-2"><i class="fas fa-phone-alt me-2"></i> (502) 2222-3333</li>
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@chapindonas.com</li>
-                        <li class="mb-2"><i class="fas fa-clock me-2"></i> Lun - Sáb: 8:00 AM - 8:00 PM</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>3a. Avenida 2-28, Zona 1 Boca Del Monte, Villa Canales, Guatemala</li>
+                        <li class="mb-2"><i class="fas fa-phone-alt me-2"></i> (502) 5532-5757</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> donaschapin@gmail.com</li>
+                        <li class="mb-2"><i class="fas fa-clock me-2"></i> Lun - Dom: 7:00 AM - 8:00 PM</li>
                     </ul>
                 </div>
             </div>
@@ -600,7 +731,18 @@
         });
         </script>
 
-        
+        <script>
+        // Funcionalidad para el botón de redes sociales
+        document.getElementById('socialFloat').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('socialDropdown').classList.toggle('show');
+        });
+
+        // Cerrar el menú al hacer clic en cualquier parte de la página
+        document.addEventListener('click', function() {
+            document.getElementById('socialDropdown').classList.remove('show');
+        });
+        </script>
 
 </body>
 </html>
