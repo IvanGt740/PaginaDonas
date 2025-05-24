@@ -235,7 +235,106 @@
         }
     }
 
+     /* Estilos para el modal de personalización */
+    .customization-modal {
+        display: none;
+        position: fixed;
+        z-index: 1050;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
     
+    .customization-content {
+        background-color: #fff8f0;
+        margin: 5% auto;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        width: 80%;
+        max-width: 600px;
+        position: relative;
+    }
+    
+    .close-customization {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .close-customization:hover {
+        color: #333;
+    }
+    
+    .customization-section {
+        margin-bottom: 20px;
+    }
+    
+    .customization-title {
+        color: #ff6699;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+    
+    .customization-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .customization-option {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .customization-option:hover {
+        background-color: #ff9933;
+        color: white;
+        border-color: #ff9933;
+    }
+    
+    .customization-option.selected {
+        background-color: #ff6699;
+        color: white;
+        border-color: #ff6699;
+    }
+    
+    .customization-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .price-update {
+        font-weight: bold;
+        color: #ff9933;
+    }
+    
+    .confirm-customization {
+        background-color: #ff9933;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .confirm-customization:hover {
+        background-color: #e88a20;
+    }
 
         
 
@@ -691,23 +790,50 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // Función para añadir productos al carrito
-        function addToCart(product) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            // Verificar si el producto ya está en el carrito
-            const existingProduct = cart.find(item => item.id === product.id);
-            
-            if (existingProduct) {
-                existingProduct.quantity += 1;
-            } else {
-                product.quantity = 1;
-                cart.push(product);
+        // Modificar la función addToCart para manejar productos personalizados
+            function addToCart(product) {
+                // Verificar si es un producto directo (sin personalización)
+                if (!product.customizations) {
+                    // Si es directo, abrir el modal de personalización
+                    openCustomizationModal(product);
+                    return; // Salir de la función para no añadir el producto dos veces
+                }
+                
+                // El resto de la función sigue igual para productos personalizados
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                
+                // Crear un ID único para productos personalizados
+                let productId = product.id;
+                if (product.customizations) {
+                    productId += "-" + Date.now();
+                }
+                
+                // Verificar si el producto ya está en el carrito (solo para no personalizados)
+                const existingProduct = !product.customizations ? 
+                    cart.find(item => item.id === product.id && !item.customizations) : 
+                    null;
+                    
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    product.quantity = 1;
+                    cart.push({...product, id: productId});
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                
+                // Mostrar feedback
+                const feedback = document.createElement('div');
+                feedback.innerHTML = `<div style="position: fixed; bottom: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px; border-radius: 5px; z-index: 1000;">
+                    <i class="fas fa-check"></i> Producto añadido al carrito!
+                </div>`;
+                document.body.appendChild(feedback);
+                
+                setTimeout(() => {
+                    feedback.remove();
+                }, 3000);
             }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-        }
 
         // Actualizar contador del carrito
         function updateCartCount() {
@@ -742,6 +868,263 @@
         document.addEventListener('click', function() {
             document.getElementById('socialDropdown').classList.remove('show');
         });
+        </script>
+
+        <div id="customizationModal" class="customization-modal">
+            <div class="customization-content">
+                <span class="close-customization">&times;</span>
+                <h3 id="productCustomizationTitle"></h3>
+                
+                <div class="customization-section">
+                    <h4 class="customization-title">Selecciona tus Jarabes (<span id="jarabeCount">0</span>/<span id="maxJarabes">1</span>)</h4>
+                    <div class="customization-options" id="jarabeOptions">
+                        <div class="customization-option" data-value="Nutella">Nutella</div>
+                        <div class="customization-option" data-value="Leche Condensada">Leche Condensada</div>
+                        <div class="customization-option" data-value="Cajeta">Cajeta</div>
+                        <div class="customization-option" data-value="Hershey's de fresa">Hershey's de fresa</div>
+                    </div>
+                </div>
+                
+                <div class="customization-section">
+                    <h4 class="customization-title">Selecciona tus Toppings (<span id="toppingCount">0</span>/<span id="maxToppings">1</span>)</h4>
+                    <div class="customization-options" id="toppingOptions">
+                        <div class="customization-option" data-value="Oreo">Oreo</div>
+                        <div class="customization-option" data-value="Chispas de Chocolate">Chispas de Chocolate</div>
+                        <div class="customization-option" data-value="Coco Rallado">Coco Rallado</div>
+                        <div class="customization-option" data-value="Manía">Manía</div>
+                        <div class="customization-option" data-value="Anicillo">Anicillo</div>
+                        <div class="customization-option" data-value="Almendra">Almendra</div>
+                    </div>
+                </div>
+                
+                <div class="customization-section">
+                    <h4 class="customization-title">Selecciona Frutas (Q3 adicional por cada una)</h4>
+                    <div class="customization-options" id="fruitOptions">
+                        <div class="customization-option" data-value="Banano">Banano (+Q3)</div>
+                        <div class="customization-option" data-value="Fresa">Fresa (+Q3)</div>
+                        <div class="customization-option" data-value="Melocotón">Melocotón (+Q3)</div>
+                    </div>
+                </div>
+                
+                <div class="customization-footer">
+                    <div>
+                        <span>Precio total: </span>
+                        <span class="price-update" id="updatedPrice">Q0.00</span>
+                    </div>
+                    <button class="confirm-customization" id="confirmCustomization">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Variables para el modal de personalización
+            let currentProduct = null;
+            let basePrice = 0;
+            let selectedJarabes = [];
+            let selectedToppings = [];
+            let selectedFruits = [];
+            
+            // Función para abrir el modal de personalización
+            function openCustomizationModal(product) {
+                currentProduct = product;
+                basePrice = product.price;
+                selectedJarabes = [];
+                selectedToppings = [];
+                selectedFruits = [];
+                
+                // Configurar límites según el producto
+                let maxJarabes = 1;
+                let maxToppings = 1;
+                
+                if (product.id === "glaseada") { // Pack 6 Mini donas
+                    maxJarabes = 2;
+                    maxToppings = 2;
+                } else if (product.id === "FresaBanano") { // Pack 8 Mini donas
+                    maxJarabes = 3;
+                    maxToppings = 3;
+                } else if (product.id === "Maple") { // Pack Fiesta 12 Mini Donas
+                    maxJarabes = 4;
+                    maxToppings = 4;
+                }
+                
+                document.getElementById("maxJarabes").textContent = maxJarabes;
+                document.getElementById("maxToppings").textContent = maxToppings;
+                document.getElementById("productCustomizationTitle").textContent = product.name;
+                document.getElementById("updatedPrice").textContent = `Q${basePrice.toFixed(2)}`;
+                
+                // Resetear selecciones visuales
+                document.querySelectorAll(".customization-option").forEach(option => {
+                    option.classList.remove("selected");
+                });
+                
+                // Actualizar contadores
+                updateCounters();
+                
+                // Mostrar modal
+                document.getElementById("customizationModal").style.display = "block";
+            }
+            
+            // Función para actualizar los contadores
+            function updateCounters() {
+                document.getElementById("jarabeCount").textContent = selectedJarabes.length;
+                document.getElementById("toppingCount").textContent = selectedToppings.length;
+                
+                // Calcular precio total
+                let totalPrice = basePrice + (selectedFruits.length * 3);
+                document.getElementById("updatedPrice").textContent = `Q${totalPrice.toFixed(2)}`;
+            }
+            
+            // Función para cerrar el modal
+            function closeCustomizationModal() {
+                document.getElementById("customizationModal").style.display = "none";
+            }
+            
+            // Event listeners para el modal
+            document.addEventListener("DOMContentLoaded", function() {
+                // Cerrar modal al hacer clic en la X
+                document.querySelector(".close-customization").addEventListener("click", closeCustomizationModal);
+                
+                // Cerrar modal al hacer clic fuera del contenido
+                window.addEventListener("click", function(event) {
+                    if (event.target === document.getElementById("customizationModal")) {
+                        closeCustomizationModal();
+                    }
+                });
+                
+                // Manejar selección de jarabes
+                document.getElementById("jarabeOptions").addEventListener("click", function(e) {
+                    if (e.target.classList.contains("customization-option")) {
+                        const maxJarabes = parseInt(document.getElementById("maxJarabes").textContent);
+                        const value = e.target.getAttribute("data-value");
+                        
+                        if (e.target.classList.contains("selected")) {
+                            // Deseleccionar
+                            e.target.classList.remove("selected");
+                            selectedJarabes = selectedJarabes.filter(item => item !== value);
+                        } else {
+                            // Verificar límite
+                            if (selectedJarabes.length < maxJarabes) {
+                                e.target.classList.add("selected");
+                                selectedJarabes.push(value);
+                            } else {
+                                alert(`Solo puedes seleccionar hasta ${maxJarabes} jarabes para este producto.`);
+                            }
+                        }
+                        
+                        updateCounters();
+                    }
+                });
+                
+                // Manejar selección de toppings
+                document.getElementById("toppingOptions").addEventListener("click", function(e) {
+                    if (e.target.classList.contains("customization-option")) {
+                        const maxToppings = parseInt(document.getElementById("maxToppings").textContent);
+                        const value = e.target.getAttribute("data-value");
+                        
+                        if (e.target.classList.contains("selected")) {
+                            // Deseleccionar
+                            e.target.classList.remove("selected");
+                            selectedToppings = selectedToppings.filter(item => item !== value);
+                        } else {
+                            // Verificar límite
+                            if (selectedToppings.length < maxToppings) {
+                                e.target.classList.add("selected");
+                                selectedToppings.push(value);
+                            } else {
+                                alert(`Solo puedes seleccionar hasta ${maxToppings} toppings para este producto.`);
+                            }
+                        }
+                        
+                        updateCounters();
+                    }
+                });
+                
+                // Manejar selección de frutas
+                document.getElementById("fruitOptions").addEventListener("click", function(e) {
+                    if (e.target.classList.contains("customization-option")) {
+                        const value = e.target.getAttribute("data-value");
+                        
+                        if (e.target.classList.contains("selected")) {
+                            // Deseleccionar
+                            e.target.classList.remove("selected");
+                            selectedFruits = selectedFruits.filter(item => item !== value);
+                        } else {
+                            // No hay límite para frutas, solo incremento de precio
+                            e.target.classList.add("selected");
+                            selectedFruits.push(value);
+                        }
+                        
+                        updateCounters();
+                    }
+                });
+                
+                // Confirmar personalización
+                document.getElementById("confirmCustomization").addEventListener("click", function() {
+                    if (currentProduct) {
+                        // Verificar que se hayan seleccionado los ingredientes requeridos
+                        const maxJarabes = parseInt(document.getElementById("maxJarabes").textContent);
+                        const maxToppings = parseInt(document.getElementById("maxToppings").textContent);
+                        
+                        if (selectedJarabes.length > maxJarabes) {
+                            alert(`Solo puedes seleccionar hasta ${maxJarabes} jarabes.`);
+                            return;
+                        }
+                        
+                        if (selectedToppings.length > maxToppings) {
+                            alert(`Solo puedes seleccionar hasta ${maxToppings} toppings.`);
+                            return;
+                        }
+                        
+                        // Crear objeto de producto personalizado
+                        const customizedProduct = {
+                            ...currentProduct,
+                            customizations: {
+                                jarabes: selectedJarabes,
+                                toppings: selectedToppings,
+                                fruits: selectedFruits
+                            },
+                            finalPrice: basePrice + (selectedFruits.length * 3)
+                        };
+                        
+                        // Añadir al carrito
+                        addToCart(customizedProduct);
+                        
+                        // Cerrar modal
+                        closeCustomizationModal();
+                    }
+                });
+            });
+            
+            
+            
+            // Modificar los botones de añadir al carrito para abrir el modal
+            document.addEventListener("DOMContentLoaded", function() {
+                const productButtons = document.querySelectorAll(".product-card button");
+                
+                productButtons.forEach(button => {
+                    button.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        
+                        // Obtener los datos del producto del botón
+                        const productCard = this.closest(".product-card");
+                        const productName = productCard.querySelector(".card-title").textContent;
+                        const productPrice = parseFloat(productCard.querySelector(".fw-bold").textContent.replace("Q", ""));
+                        const productImage = productCard.querySelector(".product-image").style.backgroundImage
+                            .replace('url("', '').replace('")', '');
+                        
+                        // Crear objeto producto
+                        const product = {
+                            id: this.getAttribute("onclick").match(/id: "([^"]+)"/)[1],
+                            name: productName,
+                            price: productPrice,
+                            image: productImage
+                        };
+                        
+                        // Abrir modal de personalización
+                        openCustomizationModal(product);
+                    });
+                });
+            });
         </script>
 
 </body>

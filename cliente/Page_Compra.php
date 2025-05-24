@@ -348,121 +348,11 @@
             <div class="row">
                 <!-- Cart Items -->
                 <div class="col-lg-8">
-                    <!-- Cart Item 1 -->
-                    <div class="cart-item p-3 mb-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 col-4 mb-3 mb-md-0">
-                                <img src="/api/placeholder/150/150" alt="Dona de Chocolate" class="img-fluid">
-                            </div>
-                            <div class="col-md-4 col-8 mb-3 mb-md-0">
-                                <h5>Dona de Chocolate</h5>
-                                <p class="text-muted small mb-0">Glaseada con chocolate premium</p>
-                            </div>
-                            <div class="col-md-2 col-4">
-                                <div class="quantity-control">
-                                    <button class="quantity-decrease">-</button>
-                                    <input type="text" value="1" class="quantity-input" readonly>
-                                    <button class="quantity-increase">+</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-4 text-md-center">
-                                <span class="fw-bold">Q25.00</span>
-                            </div>
-                            <div class="col-md-2 col-4 text-end">
-                                <button class="btn btn-sm btn-link text-danger remove-item">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cart Item 2 -->
-                    <div class="cart-item p-3 mb-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 col-4 mb-3 mb-md-0">
-                                <img src="/api/placeholder/150/150" alt="Dona de Fresa" class="img-fluid">
-                            </div>
-                            <div class="col-md-4 col-8 mb-3 mb-md-0">
-                                <h5>Dona de Fresa</h5>
-                                <p class="text-muted small mb-0">Cubierta con glaseado de fresa natural</p>
-                            </div>
-                            <div class="col-md-2 col-4">
-                                <div class="quantity-control">
-                                    <button class="quantity-decrease">-</button>
-                                    <input type="text" value="2" class="quantity-input" readonly>
-                                    <button class="quantity-increase">+</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-4 text-md-center">
-                                <span class="fw-bold">Q44.00</span>
-                            </div>
-                            <div class="col-md-2 col-4 text-end">
-                                <button class="btn btn-sm btn-link text-danger remove-item">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cart Item 3 -->
-                    <div class="cart-item p-3 mb-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 col-4 mb-3 mb-md-0">
-                                <img src="/api/placeholder/150/150" alt="Dona Rellena" class="img-fluid">
-                            </div>
-                            <div class="col-md-4 col-8 mb-3 mb-md-0">
-                                <h5>Dona Rellena de Nutella</h5>
-                                <p class="text-muted small mb-0">Rellena con Nutella y azúcar glass</p>
-                            </div>
-                            <div class="col-md-2 col-4">
-                                <div class="quantity-control">
-                                    <button class="quantity-decrease">-</button>
-                                    <input type="text" value="1" class="quantity-input" readonly>
-                                    <button class="quantity-increase">+</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-4 text-md-center">
-                                <span class="fw-bold">Q28.00</span>
-                            </div>
-                            <div class="col-md-2 col-4 text-end">
-                                <button class="btn btn-sm btn-link text-danger remove-item">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cart Item 4 -->
-                    <div class="cart-item p-3 mb-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 col-4 mb-3 mb-md-0">
-                                <img src="/api/placeholder/150/150" alt="Dona Rellena" class="img-fluid">
-                            </div>
-                            <div class="col-md-4 col-8 mb-3 mb-md-0">
-                                <h5>Dona de Nutella con Fresa y Banano</h5>
-                                <p class="text-muted small mb-0">Dona de Nutella con Fresa y Banano</p>
-                            </div>
-                            <div class="col-md-2 col-4">
-                                <div class="quantity-control">
-                                    <button class="quantity-decrease">-</button>
-                                    <input type="text" value="1" class="quantity-input" readonly>
-                                    <button class="quantity-increase">+</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-4 text-md-center">
-                                <span class="fw-bold">Q28.00</span>
-                            </div>
-                            <div class="col-md-2 col-4 text-end">
-                                <button class="btn btn-sm btn-link text-danger remove-item">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <!-- Actions Bar -->
                     <div class="d-flex justify-content-between align-items-center flex-wrap mt-4">
-                        <a href="index.html" class="btn btn-outline-primary mb-3 mb-md-0">
+                        <a href="../index.html" class="btn btn-outline-primary mb-3 mb-md-0">
                             <i class="fas fa-arrow-left me-2"></i>Continuar Comprando
                         </a>
                         <button class="btn btn-outline-danger mb-3 mb-md-0" id="clear-cart">
@@ -515,7 +405,9 @@
                                 }
                                 
                                 // Calcular total
-                                const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                                const subtotal = cart.reduce((total, item) => {
+                                    return total + ((item.finalPrice || item.price) * item.quantity);
+                                }, 0);
                                 const envio = 15.00;
                                 const total = subtotal + envio;
                                 
@@ -524,7 +416,21 @@
                                 
                                 // Agregar productos al mensaje
                                 cart.forEach(item => {
-                                    message += `- ${item.name} x${item.quantity} - Q${(item.price * item.quantity).toFixed(2)}%0A`;
+                                    const itemPrice = item.finalPrice || item.price;
+                                    message += `- ${item.name} x${item.quantity} - Q${(itemPrice * item.quantity).toFixed(2)}%0A`;
+                                    
+                                    // Agregar personalizaciones si existen
+                                    if (item.customizations) {
+                                        if (item.customizations.jarabes && item.customizations.jarabes.length > 0) {
+                                            message += `  Jarabes: ${item.customizations.jarabes.join(', ')}%0A`;
+                                        }
+                                        if (item.customizations.toppings && item.customizations.toppings.length > 0) {
+                                            message += `  Toppings: ${item.customizations.toppings.join(', ')}%0A`;
+                                        }
+                                        if (item.customizations.fruits && item.customizations.fruits.length > 0) {
+                                            message += `  Frutas: ${item.customizations.fruits.join(', ')} (+Q${(item.customizations.fruits.length * 3).toFixed(2)})%0A`;
+                                        }
+                                    }
                                 });
                                 
                                 // Agregar totales
@@ -559,7 +465,7 @@
                 <i class="fas fa-shopping-cart"></i>
                 <h3>Tu carrito está vacío</h3>
                 <p class="text-muted">Parece que aún no has añadido ninguna dona a tu carrito.</p>
-                <a href="index.html" class="btn btn-primary mt-3">
+                <a href="../index.html" class="btn btn-primary mt-3">
                     Explorar Donas
                 </a>
             </div>
@@ -576,10 +482,10 @@
                     <div class="recommendation-card">
                         <img src="../images/DonaAlmendra.jpeg" alt="Dona Especial" class="w-100">
                         <div class="card-body">
-                            <h6>Mini Donas Surtidas</h6>
+                            <h6>Pack 4 Mini donas</h6>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold">Q40.00</span>
-                                <button class="btn btn-sm btn-primary">Añadir</button>
+                                <span class="fw-bold">Q15.00</span>
+                                <a href="../index.html"><button class="btn btn-sm btn-primary">Añadir </button></a>
                             </div>
                         </div>
                     </div>
@@ -590,10 +496,10 @@
                     <div class="recommendation-card">
                         <img src="../images/DonaOreo.jpeg" alt="Dona Especial" class="w-100">
                         <div class="card-body">
-                            <h6>Dona Boston Cream</h6>
+                            <h6>Pack 6 Mini donas</h6>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold">Q30.00</span>
-                                <button class="btn btn-sm btn-primary">Añadir</button>
+                                <span class="fw-bold">Q20.00</span>
+                                <a href="../index.html"><button class="btn btn-sm btn-primary">Añadir </button></a>
                             </div>
                         </div>
                     </div>
@@ -604,10 +510,10 @@
                     <div class="recommendation-card">
                         <img src="../images/DonaFresaBanano.jpeg" alt="Dona Especial" class="w-100">
                         <div class="card-body">
-                            <h6>Dona de Maple Bacon</h6>
+                            <h6>Pack 8 Mini donas</h6>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold">Q32.00</span>
-                                <button class="btn btn-sm btn-primary">Añadir</button>
+                                <span class="fw-bold">Q25.00</span>
+                                <a href="../index.html"><button class="btn btn-sm btn-primary">Añadir </button></a>
                             </div>
                         </div>
                     </div>
@@ -618,10 +524,10 @@
                     <div class="recommendation-card">
                         <img src="../images/DonaNutella.jpeg" alt="Dona Especial" class="w-100">
                         <div class="card-body">
-                            <h6>Pack Fiesta (12 uds)</h6>
+                            <h6>Pack Fiesta 12 Mini Donas</h6>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold">Q150.00</span>
-                                <button class="btn btn-sm btn-primary">Añadir</button>
+                                <span class="fw-bold">Q40.00</span>
+                                <a href="../index.html"><button class="btn btn-sm btn-primary">Añadir </button></a>
                             </div>
                         </div>
                     </div>
@@ -828,18 +734,40 @@
             let subtotal = 0;
             
             cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
+                const itemTotal = (item.finalPrice || item.price) * item.quantity;
                 subtotal += itemTotal;
+                
+                // Crear descripción de personalizaciones si existen
+                let customizationsHtml = '';
+                if (item.customizations) {
+                    customizationsHtml = `
+                    <div class="mt-2">
+                        <p class="small mb-1"><strong>Personalizaciones:</strong></p>
+                        <ul class="small text-muted mb-0">`;
+                    
+                    if (item.customizations.jarabes && item.customizations.jarabes.length > 0) {
+                        customizationsHtml += `<li>Jarabes: ${item.customizations.jarabes.join(', ')}</li>`;
+                    }
+                    if (item.customizations.toppings && item.customizations.toppings.length > 0) {
+                        customizationsHtml += `<li>Toppings: ${item.customizations.toppings.join(', ')}</li>`;
+                    }
+                    if (item.customizations.fruits && item.customizations.fruits.length > 0) {
+                        customizationsHtml += `<li>Frutas: ${item.customizations.fruits.join(', ')} (+Q${(item.customizations.fruits.length * 3).toFixed(2)})</li>`;
+                    }
+                    
+                    customizationsHtml += `</ul></div>`;
+                }
                 
                 html += `
                 <div class="cart-item p-3 mb-3" data-id="${item.id}">
                     <div class="row align-items-center">
                         <div class="col-md-2 col-4 mb-3 mb-md-0">
-                            <img src="${item.image || '/api/placeholder/150/150'}" alt="${item.name}" class="img-fluid">
+                            <img src="../${item.image || '/api/placeholder/150/150'}" alt="${item.name}" class="img-fluid">
                         </div>
                         <div class="col-md-4 col-8 mb-3 mb-md-0">
                             <h5>${item.name}</h5>
                             <p class="text-muted small mb-0">${item.description || ''}</p>
+                            ${customizationsHtml}
                         </div>
                         <div class="col-md-2 col-4">
                             <div class="quantity-control">
@@ -876,54 +804,63 @@
         }
 
         function updateSummary(subtotal) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Calcular subtotal correctamente considerando personalizaciones
+            const calculatedSubtotal = cart.reduce((total, item) => {
+                return total + ((item.finalPrice || item.price) * item.quantity);
+            }, 0);
+            
             const envio = 15.00;
             const descuento = 0.00;
-            const total = subtotal + envio - descuento;
+            const total = calculatedSubtotal + envio - descuento;
             
-            document.getElementById('subtotal').textContent = `Q${subtotal.toFixed(2)}`;
+            document.getElementById('subtotal').textContent = `Q${calculatedSubtotal.toFixed(2)}`;
             document.getElementById('descuento').textContent = `-Q${descuento.toFixed(2)}`;
             document.getElementById('envio').textContent = `Q${envio.toFixed(2)}`;
             document.getElementById('total').textContent = `Q${total.toFixed(2)}`;
         }
 
         function setupEventListeners() {
-            // Delegación de eventos para los botones dinámicos
-            document.addEventListener('click', function(e) {
-                const cartItem = e.target.closest('.cart-item');
-                if (!cartItem) return;
-                
-                const itemId = cartItem.dataset.id;
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const itemIndex = cart.findIndex(item => item.id === itemId);
-                
-                // Aumentar cantidad
-                if (e.target.classList.contains('quantity-increase')) {
-                    cart[itemIndex].quantity += 1;
-                }
-                // Disminuir cantidad
-                else if (e.target.classList.contains('quantity-decrease')) {
-                    if (cart[itemIndex].quantity > 1) {
-                        cart[itemIndex].quantity -= 1;
-                    }
-                }
-                // Eliminar producto
-                else if (e.target.closest('.remove-item')) {
-                    cart.splice(itemIndex, 1);
-                }
-                
-                localStorage.setItem('cart', JSON.stringify(cart));
-                renderCartItems(cart);
-                updateCartCount();
-            });
+        // Delegación de eventos para los botones dinámicos
+        document.addEventListener('click', function(e) {
+            const cartItem = e.target.closest('.cart-item');
+            if (!cartItem) return;
             
-            // Vaciar carrito
-            document.getElementById('clear-cart')?.addEventListener('click', function() {
-                if (confirm('¿Estás seguro de que deseas vaciar tu carrito?')) {
-                    localStorage.removeItem('cart');
-                    location.reload();
+            const itemId = cartItem.dataset.id;
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            
+            if (itemIndex === -1) return;
+            
+            // Aumentar cantidad
+            if (e.target.classList.contains('quantity-increase')) {
+                cart[itemIndex].quantity += 1;
+            }
+            // Disminuir cantidad
+            else if (e.target.classList.contains('quantity-decrease')) {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
                 }
-            });
-        }
+            }
+            // Eliminar producto
+            else if (e.target.closest('.remove-item')) {
+                cart.splice(itemIndex, 1);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCartItems(cart);
+            updateCartCount();
+        });
+        
+        // Vaciar carrito
+        document.getElementById('clear-cart')?.addEventListener('click', function() {
+            if (confirm('¿Estás seguro de que deseas vaciar tu carrito?')) {
+                localStorage.removeItem('cart');
+                location.reload();
+            }
+        });
+    }
 
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
