@@ -112,12 +112,19 @@
         }).then((unityInstance) => {
           document.querySelector("#unity-loading-bar").style.display = "none";
 
-          // ✅ Preguntar al usuario si quiere pantalla completa al iniciar
-          if (confirm("¿Deseas jugar en pantalla completa?")) {
-            unityInstance.SetFullscreen(1);
+          const fsButton = document.getElementById("start-fullscreen-button");
+
+          // Detectar si es móvil
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            fsButton.style.display = "block";
+            fsButton.onclick = () => {
+              unityInstance.SetFullscreen(1);
+              fsButton.style.display = "none"; // Ocultar después de entrar a fullscreen
+            };
           }
 
-          // ✅ También dejamos funcional el botón de pantalla completa
+          // Botón de fullscreen del footer sigue funcionando
           document.querySelector("#unity-fullscreen-button").onclick = () => {
             unityInstance.SetFullscreen(1);
           };
@@ -125,11 +132,28 @@
         }).catch((message) => {
           alert(message);
         });
+
       };
 
 
       document.body.appendChild(script);
 
     </script>
+
+    <button id="start-fullscreen-button" style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      font-size: 18px;
+      z-index: 9999;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      display: none;
+    ">Jugar en pantalla completa</button>
+
   </body>
 </html>
